@@ -3,262 +3,183 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>פיד חדשות אישי</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<title>פיד חדשות</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{background:#0d0f14;color:#e0e0e0;font-family:'Segoe UI',Arial,sans-serif;direction:rtl;min-height:100vh}
-.topbar{background:#13161e;border-bottom:1px solid #22252f;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.topbar-logo{font-size:20px;font-weight:700;color:#fff}
-.topbar-logo span{color:#4e8ef7}
-.topbar-icons{display:flex;gap:16px;color:#666}
-.topbar-icons i{font-size:22px;cursor:pointer}
-.topbar-icons i:hover{color:#fff}
-.search-wrap{background:#13161e;border-bottom:1px solid #22252f;padding:12px 18px}
-.search-inner{background:#1c1f28;border-radius:12px;display:flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid #2a2d38}
-.search-inner:focus-within{border-color:#4e8ef7}
-.search-inner i{color:#555;font-size:18px;flex-shrink:0}
-.search-inner input{background:transparent;border:none;outline:none;color:#ddd;font-size:16px;flex:1;direction:rtl;font-family:inherit}
-.search-inner input::placeholder{color:#444}
-.sources-bar{background:#13161e;border-bottom:1px solid #22252f;padding:12px 18px}
-.sources-label{font-size:11px;color:#444;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.8px}
-.sources-list{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
-.sources-list::-webkit-scrollbar{display:none}
-.src-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-size:14px;cursor:pointer;white-space:nowrap;border:1px solid #2a2d38;color:#777;background:transparent;transition:all 0.12s;flex-shrink:0}
-.src-btn:hover{border-color:#3a3d4a;color:#bbb}
-.src-btn.active{border-color:#4e8ef7;color:#7eb8ff;background:rgba(78,142,247,0.1)}
-.src-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.channels-bar{background:#0d0f14;padding:12px 18px;border-bottom:1px solid #1a1d24}
-.channels-list{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
-.channels-list::-webkit-scrollbar{display:none}
-.ch-btn{display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:20px;font-size:14px;cursor:pointer;white-space:nowrap;border:1px solid #22252f;color:#666;background:transparent;transition:all 0.12s;flex-shrink:0}
-.ch-btn:hover{color:#bbb;border-color:#333}
-.ch-btn.active{color:#fff;font-weight:600}
-.ch-btn.active.cat-all{background:rgba(78,142,247,0.15);border-color:#4e8ef7;color:#7eb8ff}
-.ch-btn.active.cat-general{background:rgba(78,142,247,0.15);border-color:#4e8ef7;color:#7eb8ff}
-.ch-btn.active.cat-tech{background:rgba(29,158,117,0.15);border-color:#1D9E75;color:#3ecfa0}
-.ch-btn.active.cat-intl{background:rgba(212,83,126,0.15);border-color:#D4537E;color:#f07aaa}
-.ch-btn.active.cat-ent{background:rgba(216,90,48,0.15);border-color:#D85A30;color:#ff8c5a}
-.ch-badge{background:#1e2128;border-radius:10px;padding:2px 7px;font-size:12px;color:#555;margin-right:2px}
-.ch-btn.active .ch-badge{background:rgba(255,255,255,0.1);color:inherit}
-.ch-btn i{font-size:17px}
-.feed{padding:16px 16px 80px;max-width:780px;margin:0 auto}
-.section-label{font-size:12px;color:#444;margin:0 2px 10px;letter-spacing:1px;text-transform:uppercase;font-weight:600}
-.card-featured{background:#171a22;border:1px solid #22252f;border-radius:16px;margin-bottom:14px;overflow:hidden;cursor:pointer;transition:border-color 0.15s}
-.card-featured:hover{border-color:#3a3d4a}
-.card-featured-img{width:100%;height:140px;background:#1c1f28;display:flex;align-items:center;justify-content:center;font-size:52px}
-.card-featured-body{padding:14px 16px}
-.card-featured-title{font-size:18px;font-weight:600;color:#f0f0f0;line-height:1.5;margin-bottom:12px}
-.card-featured-meta{display:flex;align-items:center;justify-content:space-between}
-.card{background:#171a22;border:1px solid #22252f;border-radius:14px;margin-bottom:10px;overflow:hidden;cursor:pointer;transition:border-color 0.15s}
-.card:hover{border-color:#3a3d4a}
-.card-body{padding:14px 16px}
-.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.source-pill{display:flex;align-items:center;gap:6px;font-size:13px;color:#888;font-weight:500}
-.source-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.card-time{font-size:12px;color:#444}
-.card-title{font-size:16px;color:#d8d8d8;line-height:1.55;font-weight:400}
-.new-tag{background:#4e8ef7;color:#fff;font-size:11px;padding:2px 7px;border-radius:6px;margin-left:6px;font-weight:600}
-.card-footer{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 12px;border-top:1px solid #1e2128}
-.cat-tag{font-size:12px;padding:4px 10px;border-radius:10px;font-weight:500}
-.cat-general{background:rgba(78,142,247,0.12);color:#7eb8ff}
-.cat-tech{background:rgba(29,158,117,0.12);color:#3ecfa0}
-.cat-intl{background:rgba(212,83,126,0.12);color:#f07aaa}
-.cat-ent{background:rgba(216,90,48,0.12);color:#ff8c5a}
-.card-actions{display:flex;gap:14px;color:#444}
-.card-actions i{font-size:18px;cursor:pointer}
-.card-actions i:hover{color:#aaa}
-.state-box{padding:4rem 1rem;text-align:center;color:#444;font-size:16px}
-.state-box i{font-size:42px;display:block;margin-bottom:10px;opacity:0.3}
-.bottom-bar{background:#13161e;border-top:1px solid #22252f;display:flex;justify-content:space-around;padding:10px 0 8px;position:fixed;bottom:0;left:0;right:0;z-index:100}
-.bbar-btn{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;color:#444;cursor:pointer;padding:4px 18px}
-.bbar-btn.active{color:#4e8ef7}
-.bbar-btn i{font-size:24px}
-.notify-dot{width:8px;height:8px;background:#e24b4a;border-radius:50%;position:absolute;top:6px;right:14px}
+html,body{font-family:'Heebo',sans-serif;background:#0d0f14;color:#e0e0e0;min-height:100vh;direction:rtl}
+
+#header{background:#13161e;border-bottom:1px solid #22252f;padding:0 18px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+#logo{font-size:21px;font-weight:800;color:#fff}
+#logo span{color:#4e8ef7}
+#status{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:5px 14px}
+#sdot{width:7px;height:7px;border-radius:50%;background:#22c55e;animation:pulse 2s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{box-shadow:0 0 0 4px rgba(34,197,94,0)}}
+#stxt{font-size:12px;color:rgba(255,255,255,.5);font-weight:500}
+
+#filter-bar{background:#13161e;border-bottom:1px solid #22252f;padding:10px 18px;display:flex;gap:8px;flex-wrap:wrap;position:sticky;top:52px;z-index:90;overflow-x:auto}
+.chip{padding:6px 16px;border-radius:20px;border:1px solid #2a2d38;background:transparent;font-size:13px;font-weight:600;cursor:pointer;color:#555;font-family:'Heebo',sans-serif;transition:all .12s;white-space:nowrap;flex-shrink:0}
+.chip:hover{color:#bbb;border-color:#3a3d4a}
+.chip.active{background:rgba(78,142,247,.15);border-color:#4e8ef7;color:#7eb8ff}
+
+#feed{max-width:700px;margin:0 auto;padding:16px 14px 80px;display:flex;flex-direction:column;gap:10px}
+
+.card{background:#171a22;border:1px solid #22252f;border-radius:14px;overflow:hidden;cursor:pointer;transition:border-color .15s,transform .15s;text-decoration:none;display:block}
+.card:hover{border-color:#4e8ef7;transform:translateY(-2px)}
+.card-body{padding:15px 17px}
+.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.card-channel{font-size:12px;font-weight:700;color:#4e8ef7;background:rgba(78,142,247,.1);padding:3px 10px;border-radius:10px}
+.card-time{font-size:11px;color:#444}
+.card-title{font-size:16px;color:#ddd;line-height:1.6;font-weight:500}
+.card-link{font-size:12px;color:#444;margin-top:8px;display:flex;align-items:center;gap:4px}
+.card-link svg{width:11px;height:11px;flex-shrink:0}
+
+#loading{text-align:center;padding:4rem 1rem;color:#444;font-size:15px}
+.spinner{width:30px;height:30px;border:2.5px solid #22252f;border-top-color:#4e8ef7;border-radius:50%;animation:spin .65s linear infinite;margin:0 auto 14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+#empty{display:none;text-align:center;padding:4rem;color:#444;font-size:15px}
+
+#scroll-btn{display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#13161e;color:#aaa;border:1px solid #22252f;padding:9px 20px;border-radius:10px;font-size:13px;font-weight:600;font-family:'Heebo',sans-serif;cursor:pointer;z-index:80;box-shadow:0 4px 20px rgba(0,0,0,.3);align-items:center;gap:7px;white-space:nowrap}
+#scroll-btn.show{display:flex}
+#scroll-btn:hover{background:#4e8ef7;color:#fff;border-color:#4e8ef7}
+
+#refresh-btn{position:fixed;bottom:24px;left:calc(50% + 120px);transform:translateX(-50%);background:#13161e;color:#aaa;border:1px solid #22252f;padding:9px 16px;border-radius:10px;font-size:13px;font-weight:600;font-family:'Heebo',sans-serif;cursor:pointer;z-index:80;display:flex;align-items:center;gap:6px}
+#refresh-btn:hover{border-color:#4e8ef7;color:#7eb8ff}
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <span class="topbar-logo">פיד<span>.</span>חדשות</span>
-  <div class="topbar-icons">
-    <i class="ti ti-bell" title="התראות"></i>
-    <i class="ti ti-user-circle" title="פרופיל"></i>
+<div id="header">
+  <div id="logo">פיד<span>.</span>חדשות</div>
+  <div id="status">
+    <span id="sdot"></span>
+    <span id="stxt">טוען...</span>
   </div>
 </div>
 
-<div class="search-wrap">
-  <div class="search-inner">
-    <i class="ti ti-search"></i>
-    <input id="sq" type="text" placeholder="חפש כתבות..." oninput="render()" />
-  </div>
+<div id="filter-bar">
+  <button class="chip active" data-ch="all" onclick="setFilter('all',this)">הכל</button>
 </div>
 
-<div class="sources-bar">
-  <div class="sources-label">בחר ערוץ חדשות</div>
-  <div class="sources-list">
-    <div class="src-btn active" data-src="all" onclick="setSrc('all')"><span class="src-dot" style="background:#4e8ef7"></span>הכל</div>
-    <div class="src-btn" data-src="ynet" onclick="setSrc('ynet')"><span class="src-dot" style="background:#e63946"></span>Ynet</div>
-    <div class="src-btn" data-src="walla" onclick="setSrc('walla')"><span class="src-dot" style="background:#f4a261"></span>וואלה</div>
-    <div class="src-btn" data-src="maariv" onclick="setSrc('maariv')"><span class="src-dot" style="background:#2a9d8f"></span>מעריב</div>
-    <div class="src-btn" data-src="mako" onclick="setSrc('mako')"><span class="src-dot" style="background:#e9c46a"></span>מאקו</div>
-    <div class="src-btn" data-src="geektime" onclick="setSrc('geektime')"><span class="src-dot" style="background:#8338ec"></span>Geektime</div>
-    <div class="src-btn" data-src="bbc" onclick="setSrc('bbc')"><span class="src-dot" style="background:#e63946"></span>BBC</div>
-    <div class="src-btn" data-src="reuters" onclick="setSrc('reuters')"><span class="src-dot" style="background:#4e8ef7"></span>Reuters</div>
-  </div>
+<div id="feed">
+  <div id="loading"><div class="spinner"></div>טוען חדשות...</div>
+  <div id="empty">אין חדשות להצגה</div>
 </div>
 
-<div class="channels-bar">
-  <div class="channels-list">
-    <div class="ch-btn cat-all active" data-tab="all" onclick="setTab('all')"><i class="ti ti-layout-list"></i>הכל <span class="ch-badge" id="cnt-all">0</span></div>
-    <div class="ch-btn cat-general" data-tab="general" onclick="setTab('general')"><i class="ti ti-news"></i>כלליות <span class="ch-badge" id="cnt-general">0</span></div>
-    <div class="ch-btn cat-tech" data-tab="tech" onclick="setTab('tech')"><i class="ti ti-device-laptop"></i>טכנולוגיה <span class="ch-badge" id="cnt-tech">0</span></div>
-    <div class="ch-btn cat-intl" data-tab="intl" onclick="setTab('intl')"><i class="ti ti-world"></i>בינלאומי <span class="ch-badge" id="cnt-intl">0</span></div>
-    <div class="ch-btn cat-ent" data-tab="ent" onclick="setTab('ent')"><i class="ti ti-movie"></i>בידור <span class="ch-badge" id="cnt-ent">0</span></div>
-    <div class="ch-btn" onclick="loadAll()"><i class="ti ti-refresh"></i>רענן</div>
-  </div>
-</div>
+<button id="scroll-btn" onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><polyline points="6 9 12 15 18 9"/></svg>
+  גלול למטה
+</button>
 
-<div class="feed" id="feed">
-  <div class="state-box"><i class="ti ti-loader"></i>טוען חדשות...</div>
-</div>
-
-<div class="bottom-bar">
-  <div class="bbar-btn active"><i class="ti ti-home"></i>ראשי</div>
-  <div class="bbar-btn"><i class="ti ti-bookmark"></i>שמורים</div>
-  <div class="bbar-btn" style="position:relative"><i class="ti ti-bell"></i><span class="notify-dot"></span>התראות</div>
-  <div class="bbar-btn"><i class="ti ti-settings"></i>הגדרות</div>
-</div>
+<button id="refresh-btn" onclick="load()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+  רענן
+</button>
 
 <script>
-const CORS = 'https://corsproxy.io/?';
-const ALL_SOURCES = [
-  {key:'ynet',    url:'https://www.ynet.co.il/Integration/StoryRss2.xml',      name:'Ynet',        cat:'general', color:'#e63946'},
-  {key:'walla',   url:'https://rss.walla.co.il/feed/1',                        name:'וואלה',        cat:'general', color:'#f4a261'},
-  {key:'maariv',  url:'https://www.maariv.co.il/Rss/RssFeedsMivzakiChadashot',name:'מעריב',        cat:'general', color:'#2a9d8f'},
-  {key:'mako',    url:'https://rss.mako.co.il/rss/31750a2610f26110VgnVCM1000005201000aRCRD.xml', name:'מאקו', cat:'general', color:'#e9c46a'},
-  {key:'geektime',url:'https://www.geektime.co.il/feed/',                      name:'Geektime',    cat:'tech',    color:'#8338ec'},
-  {key:'walla',   url:'https://rss.walla.co.il/feed/10',                       name:'וואלה טק',    cat:'tech',    color:'#f4a261'},
-  {key:'ynet',    url:'https://www.ynet.co.il/Integration/StoryRss54.xml',     name:'Ynet טק',     cat:'tech',    color:'#e63946'},
-  {key:'bbc',     url:'https://feeds.bbci.co.uk/news/world/rss.xml',           name:'BBC',         cat:'intl',    color:'#e63946'},
-  {key:'reuters', url:'https://feeds.reuters.com/reuters/worldNews',            name:'Reuters',     cat:'intl',    color:'#4e8ef7'},
-  {key:'walla',   url:'https://rss.walla.co.il/feed/6',                        name:'וואלה בידור', cat:'ent',     color:'#f4a261'},
-  {key:'ynet',    url:'https://www.ynet.co.il/Integration/StoryRss6.xml',      name:'Ynet בידור',  cat:'ent',     color:'#e63946'},
-];
-const CAT_NAME = {general:'כלליות',tech:'טכנולוגיה',intl:'בינלאומי',ent:'בידור'};
-const CAT_CLS  = {general:'cat-general',tech:'cat-tech',intl:'cat-intl',ent:'cat-ent'};
-const CAT_EMOJI= {general:'📰',tech:'💻',intl:'🌍',ent:'🎬'};
+const SHEET_ID = '1sbY4tBfW_apEstHeI92iG0IsBQ3OjYZWUaH90B0h0AA';
+const URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&tqx=responseHandler:_cb`;
 
-let allArticles=[], activeTab='all', activeSrc='all';
+let all=[], active='all';
 
-function ago(d){
-  const m=Math.floor((Date.now()-new Date(d))/60000);
-  if(m<2)return 'עכשיו';
-  if(m<60)return m+' דק\'';
-  if(m<1440)return Math.floor(m/60)+' ש\'';
-  return Math.floor(m/1440)+' ימים';
-}
-
-async function fetchFeed(s){
+window._cb = function(json){
   try{
-    const res = await fetch(CORS + encodeURIComponent(s.url));
-    const txt = await res.text();
-    const xml = new DOMParser().parseFromString(txt,'text/xml');
-    const items = [...xml.querySelectorAll('item')].slice(0,8);
-    return items.map((item,idx)=>({
-      title:   item.querySelector('title')?.textContent||'',
-      link:    item.querySelector('link')?.textContent || item.querySelector('guid')?.textContent||'#',
-      pubDate: item.querySelector('pubDate')?.textContent||new Date().toISOString(),
-      source:  s.name, cat: s.cat, color: s.color, srcKey: s.key, isNew: idx===0
-    }));
-  }catch(e){return []}
+    const rows = json.table.rows || [];
+    all = [];
+    rows.forEach(r => {
+      const channel = r.c[0]?.v || '';
+      const title   = r.c[1]?.v || '';
+      const link    = r.c[2]?.v || '';
+      if(title && title !== 'text' && channel !== 'channel') {
+        all.push({channel: channel||'Ynet', title, link});
+      }
+    });
+    updateChips();
+    render();
+    setStatus('מחובר ✓', true);
+  } catch(e) {
+    setStatus('שגיאה בטעינה', false);
+  }
+};
+
+function load(){
+  const old = document.getElementById('_s');
+  if(old) old.remove();
+  const s = document.createElement('script');
+  s.id = '_s';
+  s.src = URL + '&_=' + Date.now();
+  document.head.appendChild(s);
 }
 
-async function loadAll(){
-  document.getElementById('feed').innerHTML='<div class="state-box"><i class="ti ti-loader"></i>טוען חדשות...</div>';
-  allArticles=[];
-  const res = await Promise.all(ALL_SOURCES.map(s=>fetchFeed(s)));
-  res.forEach(r=>allArticles.push(...r));
-  allArticles.sort((a,b)=>new Date(b.pubDate)-new Date(a.pubDate));
-  updateCounts();
-  render();
+function filtered(){
+  return active==='all' ? all : all.filter(m=>m.channel===active);
 }
 
-function updateCounts(){
-  const base = activeSrc==='all' ? allArticles : allArticles.filter(a=>a.srcKey===activeSrc);
-  document.getElementById('cnt-all').textContent=base.length;
-  ['general','tech','intl','ent'].forEach(c=>{
-    document.getElementById('cnt-'+c).textContent=base.filter(a=>a.cat===c).length;
+function updateChips(){
+  const bar = document.getElementById('filter-bar');
+  const chs = [...new Set(all.map(m=>m.channel).filter(Boolean))];
+  const ex  = new Set([...bar.querySelectorAll('.chip')].map(b=>b.dataset.ch));
+  chs.forEach(ch => {
+    if(ex.has(ch)) return;
+    const b = document.createElement('button');
+    b.className='chip'; b.dataset.ch=ch; b.textContent=ch;
+    b.onclick=()=>setFilter(ch,b);
+    bar.appendChild(b);
   });
 }
 
-function setSrc(s){
-  activeSrc=s;
-  document.querySelectorAll('.src-btn').forEach(el=>el.classList.toggle('active',el.dataset.src===s));
-  updateCounts(); render();
-}
-
-function setTab(t){
-  activeTab=t;
-  document.querySelectorAll('.ch-btn[data-tab]').forEach(el=>el.classList.toggle('active',el.dataset.tab===t));
+function setFilter(ch, btn){
+  active = ch;
+  document.querySelectorAll('.chip').forEach(b=>b.classList.toggle('active', b.dataset.ch===ch));
   render();
 }
 
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') }
+
 function render(){
-  const q=(document.getElementById('sq').value||'').trim().toLowerCase();
-  let list = activeSrc==='all' ? [...allArticles] : allArticles.filter(a=>a.srcKey===activeSrc);
-  if(activeTab!=='all') list=list.filter(a=>a.cat===activeTab);
-  if(q) list=list.filter(a=>a.title.toLowerCase().includes(q));
-  if(!list.length){
-    document.getElementById('feed').innerHTML='<div class="state-box"><i class="ti ti-news-off"></i>לא נמצאו כתבות</div>';
+  const feed = document.getElementById('feed');
+  document.getElementById('loading').style.display = 'none';
+  const msgs = filtered();
+  feed.querySelectorAll('.card').forEach(e=>e.remove());
+
+  if(!msgs.length){
+    document.getElementById('empty').style.display='block';
     return;
   }
-  const f=list[0], rest=list.slice(1);
-  let html=`
-    <p class="section-label">כתבה מובילה</p>
-    <div class="card-featured" onclick="window.open('${f.link}','_blank')">
-      <div class="card-featured-img">${CAT_EMOJI[f.cat]||'📰'}</div>
-      <div class="card-featured-body">
-        <div class="card-featured-title">${f.title.length>120?f.title.slice(0,120)+'…':f.title}</div>
-        <div class="card-featured-meta">
-          <span class="source-pill"><span class="source-dot" style="background:${f.color}"></span>${f.source}</span>
-          <span style="font-size:13px;color:#444">${ago(f.pubDate)}</span>
-        </div>
-      </div>
-      <div class="card-footer">
-        <span class="cat-tag ${CAT_CLS[f.cat]||'cat-general'}">${CAT_NAME[f.cat]||f.cat}</span>
-        <div class="card-actions">
-          <i class="ti ti-bookmark" title="שמור"></i>
-          <i class="ti ti-share-2" title="שתף"></i>
-          <i class="ti ti-external-link" title="פתח"></i>
-        </div>
-      </div>
-    </div>
-    <p class="section-label" style="margin-top:6px">עוד כתבות</p>`;
-  html+=rest.map(a=>`
-    <div class="card" onclick="window.open('${a.link}','_blank')">
+  document.getElementById('empty').style.display='none';
+
+  const frag = document.createDocumentFragment();
+  msgs.forEach(m => {
+    const a = document.createElement('a');
+    a.className = 'card';
+    a.href = m.link || '#';
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.innerHTML = `
       <div class="card-body">
         <div class="card-top">
-          <span class="source-pill">
-            <span class="source-dot" style="background:${a.color}"></span>
-            ${a.isNew?'<span class="new-tag">חדש</span>':''}${a.source}
-          </span>
-          <span class="card-time">${ago(a.pubDate)}</span>
+          <span class="card-channel">${esc(m.channel)}</span>
         </div>
-        <div class="card-title">${a.title.length>100?a.title.slice(0,100)+'…':a.title}</div>
-      </div>
-      <div class="card-footer">
-        <span class="cat-tag ${CAT_CLS[a.cat]||'cat-general'}">${CAT_NAME[a.cat]||a.cat}</span>
-        <div class="card-actions">
-          <i class="ti ti-bookmark" title="שמור"></i>
-          <i class="ti ti-external-link" title="פתח"></i>
-        </div>
-      </div>
-    </div>`).join('');
-  document.getElementById('feed').innerHTML=html;
+        <div class="card-title">${esc(m.title)}</div>
+        ${m.link ? `<div class="card-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>פתח כתבה</div>` : ''}
+      </div>`;
+    frag.appendChild(a);
+  });
+  feed.appendChild(frag);
 }
 
-loadAll();
+function setStatus(msg, ok){
+  document.getElementById('stxt').textContent = msg;
+  document.getElementById('sdot').style.background = ok ? '#22c55e' : '#e53935';
+}
+
+window.addEventListener('scroll', ()=>{
+  const up = window.scrollY < document.body.scrollHeight - window.innerHeight - 100;
+  document.getElementById('scroll-btn').classList.toggle('show', up);
+}, {passive:true});
+
+load();
+setInterval(load, 60000);
 </script>
 </body>
 </html>
